@@ -1,12 +1,25 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from './auth/auth-service';
+import { CommonModule } from '@angular/common';
+import { Header } from './layout/header/header';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule, Header],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('agoraWEB');
+
+  constructor(
+    public auth: AuthService,
+    public router: Router
+  ) {}
+
+  showHeader(): boolean {
+    const hiddenRoutes = ['/login', '/register'];
+    return this.auth.isAuthenticated() && !hiddenRoutes.includes(this.router.url);
+  }
 }

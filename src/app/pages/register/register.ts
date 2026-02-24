@@ -1,0 +1,55 @@
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../auth/auth-service';
+
+@Component({
+  selector: 'app-register',
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterModule],
+  templateUrl: './register.html',
+  styleUrl: './register.css',
+})
+export class Register {
+
+  username = '';
+  email = '';
+  password = '';
+  confirmPassword = '';
+  errorMessage = '';
+
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private cd: ChangeDetectorRef
+  ) {}
+
+  onRegister() {
+    this.errorMessage = '';
+
+    if (!this.username || !this.email || !this.password || !this.confirmPassword) {
+      this.errorMessage = 'Preencha todos os campos';
+      return;
+    }
+
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'As senhas não coincidem';
+      return;
+    }
+
+    this.auth.register(this.username, this.email, this.password).subscribe({
+      next: (response) => {
+        if (!response.token) return;
+
+        this.auth.saveToken(response.token);
+        this.router.navigate(['']);
+      },
+      error: () => {
+        this.errorMessage = 'Erro ao registrar usuário';
+        this.cd.detectChanges();
+      }
+    });
+  }
+
+}

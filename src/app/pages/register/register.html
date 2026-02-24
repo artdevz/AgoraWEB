@@ -1,0 +1,42 @@
+<div class="page-center">
+  <div class="card">
+    <h2>Criar Conta</h2>
+
+    <input
+      type="text"
+      placeholder="Username"
+      [(ngModel)]="username"
+    />
+
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="email"
+    />
+
+    <input
+      type="password"
+      placeholder="Senha"
+      [(ngModel)]="password"
+    />
+
+    <input
+      type="password"
+      placeholder="Confirmar senha"
+      [(ngModel)]="confirmPassword"
+    />
+
+    <button type="button" (click)="onRegister()">
+      Registrar
+    </button>
+
+    <p class="link-text">
+      Já tem conta?
+      <a routerLink="/login">Entrar</a>
+    </p>
+
+    <p class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+  </div>
+</div>
