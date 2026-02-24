@@ -19,6 +19,10 @@ export class Register {
   confirmPassword = '';
   errorMessage = '';
 
+  passwordStrength = 0;
+  passwordLabel = '';
+  passwordColor = '';
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -50,6 +54,36 @@ export class Register {
         this.cd.detectChanges();
       }
     });
+  }
+
+  checkPasswordStrength() {
+    const password = this.password;
+    let score = 0;
+
+    if (!password) {
+      this.passwordStrength = 0;
+      this.passwordLabel = '';
+      return;
+    }
+
+    if (password.length >= 8 && password.length <= 32) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[\W_]/.test(password)) score++;
+
+    this.passwordStrength = score;
+
+    if (score <= 2) {
+      this.passwordLabel = 'Fraca';
+      this.passwordColor = '#d00000';
+    } else if (score <= 4) {
+      this.passwordLabel = 'Moderada';
+      this.passwordColor = '#ff8800';
+    } else {
+      this.passwordLabel = 'Forte';
+      this.passwordColor = '#00a000';
+    }
   }
 
 }

@@ -89,3 +89,16 @@
     transform: translateY(0);
   }
 }
+
+.password-strength {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.strength-bar {
+  height: 6px;
+  border-radius: 4px;
+  background: #ddd;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+}

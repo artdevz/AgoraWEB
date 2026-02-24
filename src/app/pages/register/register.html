@@ -2,33 +2,27 @@
   <div class="card">
     <h2>Criar Conta</h2>
 
-    <input
-      type="text"
-      placeholder="Username"
-      [(ngModel)]="username"
-    />
+    <input type="text" placeholder="Username" [(ngModel)]="username"/>
 
-    <input
-      type="email"
-      placeholder="Email"
-      [(ngModel)]="email"
-    />
+    <input type="email" placeholder="Email" [(ngModel)]="email"/>
 
-    <input
-      type="password"
-      placeholder="Senha"
-      [(ngModel)]="password"
-    />
+    <input type="password" placeholder="Senha" [(ngModel)]="password" (ngModelChange)="checkPasswordStrength()"/>
 
-    <input
-      type="password"
-      placeholder="Confirmar senha"
-      [(ngModel)]="confirmPassword"
-    />
+    <input type="password" placeholder="Confirmar senha" [(ngModel)]="confirmPassword"/>
 
-    <button type="button" (click)="onRegister()">
-      Registrar
-    </button>
+    <div class="password-strength" *ngIf="password">
+        <div
+            class="strength-bar"
+            [style.width.%]="passwordStrength * 20"
+            [style.background]="passwordColor"
+        ></div>
+
+        <span [style.color]="passwordColor">
+            {{ passwordLabel }}
+        </span>
+    </div>
+
+    <button type="button" (click)="onRegister()">Registrar</button>
 
     <p class="link-text">
       Já tem conta?
