@@ -13,11 +13,14 @@ import { AuthService } from '../../auth/auth-service';
 })
 export class Register {
 
-  username = '';
+  nickname = '';
   email = '';
   password = '';
   confirmPassword = '';
   errorMessage = '';
+
+  showPassword = false;
+  showConfirmPassword = false;
 
   passwordStrength = 0;
   passwordLabel = '';
@@ -29,10 +32,22 @@ export class Register {
     private cd: ChangeDetectorRef
   ) {}
 
+  togglePassword() { this.showPassword = !this.showPassword; }
+  toggleConfirmPassword() { this.showConfirmPassword = !this.showConfirmPassword; }
+
+  get canRegister() {
+    return (
+      this.nickname.trim().length > 0 &&
+      this.email.trim().length > 0 &&
+      this.password.length <= 32 &&
+      this.passwordStrength >= 5
+    );
+  }
+
   onRegister() {
     this.errorMessage = '';
 
-    if (!this.username || !this.email || !this.password || !this.confirmPassword) {
+    if (!this.nickname || !this.email || !this.password || !this.confirmPassword) {
       this.errorMessage = 'Preencha todos os campos';
       return;
     }
@@ -42,7 +57,7 @@ export class Register {
       return;
     }
 
-    this.auth.register(this.username, this.email, this.password).subscribe({
+    this.auth.register(this.nickname, this.email, this.password).subscribe({
       next: (response) => {
         if (!response.token) return;
 

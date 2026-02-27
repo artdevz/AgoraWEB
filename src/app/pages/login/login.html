@@ -3,7 +3,14 @@
     <h2>Login</h2>
     <form (ngSubmit)="onLogin()">
         <input type="email" placeholder="Email" [(ngModel)]="email" name="email"/>
-        <input type="password" placeholder="Senha" [(ngModel)]="password" name="password"/>
+
+        <div class="password-field">
+          <input [type]="showPassword ? 'text' : 'password'" placeholder="Senha" [(ngModel)]="password" name="password"/>
+          <button type="button" class="eye-btn" (click)="togglePassword()">
+            <span class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</span>
+          </button>
+        </div>
+
         <button type="submit">Entrar</button>
     </form>
 

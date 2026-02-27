@@ -1,30 +1,74 @@
-<div class="page-center">
-  <div class="card">
+<div class="register-container">
+  <div class="register-card">
     <h2>Criar Conta</h2>
 
-    <input type="text" placeholder="Username" [(ngModel)]="username"/>
+    <form (ngSubmit)="onRegister()">
+      <input
+        type="text"
+        placeholder="Apelido"
+        [(ngModel)]="nickname"
+        name="nickname"
+      />
 
-    <input type="email" placeholder="Email" [(ngModel)]="email"/>
+      <input
+        type="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
+      />
 
-    <input type="password" placeholder="Senha" [(ngModel)]="password" (ngModelChange)="checkPasswordStrength()"/>
+      <div class="password-field">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Senha"
+          [(ngModel)]="password"
+          (ngModelChange)="checkPasswordStrength()"
+          name="password"
+        />
+        <button
+          type="button"
+          class="eye-btn"
+          (click)="togglePassword()"
+          aria-label="Mostrar senha">
+          <span class="material-icons">
+            {{ showPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
 
-    <input type="password" placeholder="Confirmar senha" [(ngModel)]="confirmPassword"/>
+      <div class="password-field">
+        <input
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          placeholder="Confirmar senha"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+        />
+        <button
+          type="button"
+          class="eye-btn"
+          (click)="toggleConfirmPassword()"
+          aria-label="Mostrar confirmação de senha">
+          <span class="material-icons">
+            {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </button>
+      </div>
 
-    <div class="password-strength" *ngIf="password">
+      <div class="password-strength" *ngIf="password">
         <div
-            class="strength-bar"
-            [style.width.%]="passwordStrength * 20"
-            [style.background]="passwordColor"
-        ></div>
-
+          class="strength-bar"
+          [style.width.%]="passwordStrength * 20"
+          [style.background]="passwordColor">
+        </div>
         <span [style.color]="passwordColor">
-            {{ passwordLabel }}
+          {{ passwordLabel }}
         </span>
-    </div>
+      </div>
 
-    <button type="button" (click)="onRegister()">Registrar</button>
+      <button type="submit" [disabled]="!canRegister">Registrar</button>
+    </form>
 
-    <p class="link-text">
+    <p class="register-text">
       Já tem conta?
       <a routerLink="/login">Entrar</a>
     </p>

@@ -16,9 +16,9 @@ export class AuthService {
     private router: Router
   ) {}
 
-  register(username: string, email: string, password: string) {
+  register(nickname: string, email: string, password: string) {
     return this.http.post<any>(`${this.API}/signup`, {
-      username,
+      nickname,
       email,
       password
     })

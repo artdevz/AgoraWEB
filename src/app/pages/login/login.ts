@@ -16,12 +16,15 @@ export class Login {
   email = '';
   password = '';
   errorMessage = '';
+  showPassword = false;
 
   constructor(
     private auth: AuthService,
     private router: Router,
     private cd: ChangeDetectorRef
   ) {}
+
+  togglePassword() { this.showPassword = !this.showPassword; }
 
   onLogin() {
     this.errorMessage = '';

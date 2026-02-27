@@ -1,48 +1,45 @@
-.page-center {
+.register-container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.card {
-  width: 360px;
+.register-card {
+  background-color: #ffffff;
   padding: 40px 35px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  width: 360px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
 }
 
-.card h2 {
+.register-card h2 {
   margin-bottom: 25px;
   font-weight: 600;
-  font-size: 22px;
-  letter-spacing: 1px;
+  color: #111;
 }
 
-.card input {
+.register-card input {
   width: 90%;
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ddd;
   font-size: 14px;
   transition: all 0.2s ease;
 }
 
-.card input:focus {
+.register-card input:focus {
   outline: none;
   border-color: #000;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
-.card button {
+.register-card button {
   width: 100%;
   padding: 12px;
-  margin-top: 5px;
   border-radius: 8px;
   border: none;
   background-color: #000;
@@ -52,42 +49,47 @@
   transition: all 0.2s ease;
 }
 
-.card button:hover {
+.register-card button:hover {
   background-color: #333;
-  transform: translateY(-1px);
 }
 
-.link-text {
-  margin-top: 18px;
-  font-size: 13px;
+.register-card button:disabled,
+.register-card button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
 }
 
-.link-text a {
-  text-decoration: none;
+.password-field {
+  position: relative;
+}
+
+.register-card .eye-btn {
+  position: absolute;
+  right: 20px;
+  top: 38%;
+  transform: translateY(-50%);
+
+  width: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+  color: #666;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-card .eye-btn .material-icons {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.register-card .eye-btn:hover {
   color: #000;
-  font-weight: 500;
-}
-
-.link-text a:hover {
-  text-decoration: underline;
-}
-
-.error {
-  margin-top: 12px;
-  font-size: 13px;
-  color: #d00000;
-  font-weight: 500;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .password-strength {
@@ -101,4 +103,26 @@
   background: #ddd;
   margin-bottom: 5px;
   transition: all 0.3s ease;
+}
+
+.register-text {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #555;
+}
+
+.register-text a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #d00000;
 }
