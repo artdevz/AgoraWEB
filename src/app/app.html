@@ -1,3 +1,8 @@
-<app-header *ngIf="showHeader()"></app-header>
+<app-header *ngIf="showHeader()" (openCreateTopic)="showCreateTopic = true"></app-header>
+
+<app-create-topic 
+    *ngIf="showCreateTopic" 
+    (close)="showCreateTopic = false">
+</app-create-topic>
 
 <router-outlet />

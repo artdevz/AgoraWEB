@@ -1,0 +1,30 @@
+<div class="overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+        <h2>Qual tópico desejas discutir?</h2>
+
+        <textarea
+            [(ngModel)]="content"
+            placeholder="Escreva algo...">
+        </textarea>
+
+        <input 
+            type="file"
+            (change)="onFileSelected($event)"
+            multiple
+            accept="image/*, video/*"
+        />
+
+        <div class="preview" *ngIf="selectedFiles.length > 0">
+            <div *ngFor="let file of selectedFiles; let i = index">
+                <img *ngIf="isImage(file)" [src]="previewUrls[i]" width="100"/>
+                <video *ngIf="isVideo(file)" [src]="previewUrls[i]" width="100" controls></video>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button (click)="closeModal()">Cancelar</button>
+            <button (click)="submitTopic()">Publicar</button>
+        </div>
+
+    </div>
+</div>

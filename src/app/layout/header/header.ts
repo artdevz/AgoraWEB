@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../auth/auth-service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -12,6 +12,11 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class Header implements OnInit {
 
+  @Output() openCreateTopic = new EventEmitter<void>();
+
+  selectedFiles: File[] = [];
+  previewUrls: string[] = [];
+
   nickname: string | null = null;
 
   constructor(
@@ -21,6 +26,10 @@ export class Header implements OnInit {
 
   ngOnInit(): void {
     this.nickname = this.getNicknameFromToken();
+  }
+
+  createTopic() {
+    this.openCreateTopic.emit();
   }
 
   logout() { 
