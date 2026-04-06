@@ -8,7 +8,7 @@
   gap: 15px;
 }
 
-.topic {
+.post {
   background: white;
   padding: 15px;
   border-radius: 10px;
@@ -23,22 +23,22 @@
   transition: 0.2s;
 }
 
-.topic:hover {
+.post:hover {
     transform: scale(1.02);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.topic h3 {
+.post h3 {
   margin: 0;
   font-size: 18px;
 }
 
-.topic p {
+.post p {
   margin: 0;
   color: #444;
 }
 
-.topic small {
+.post small {
   color: #888;
   font-size: 12px;
 }

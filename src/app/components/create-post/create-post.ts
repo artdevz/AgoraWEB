@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TopicService } from '../../services/topic-service';
+import { PostService } from '../../services/post-service';
 
 @Component({
-  selector: 'app-create-topic',
+  selector: 'app-create-post',
   imports: [CommonModule, FormsModule],
-  templateUrl: './create-topic.html',
-  styleUrl: './create-topic.css',
+  templateUrl: './create-post.html',
+  styleUrl: './create-post.css',
 })
-export class CreateTopic {
+export class CreatePost {
 
   @Output() close = new EventEmitter<void>();
 
@@ -19,21 +19,21 @@ export class CreateTopic {
   description: string = '';
 
   constructor(
-    private topicService: TopicService
+    private postService: PostService
   ) {}
 
   closeModal() {
     this.close.emit();
   }
 
-  submitTopic() {
-    this.topicService.create(this.title, this.description).subscribe({
+  submitPost() {
+    this.postService.create(this.title, this.description).subscribe({
       next: (response) => {
-        console.log('Topic created successfully:', response);
+        console.log('Post created successfully:', response);
         this.closeModal();
       },
       error: (error) => {
-        console.error('Error creating topic:', error);
+        console.error('Error creating post:', error);
       }
     });
     

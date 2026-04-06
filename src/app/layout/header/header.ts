@@ -12,7 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class Header implements OnInit {
 
-  @Output() openCreateTopic = new EventEmitter<void>();
+  @Output() openCreatePost = new EventEmitter<void>();
 
   selectedFiles: File[] = [];
   previewUrls: string[] = [];
@@ -28,8 +28,8 @@ export class Header implements OnInit {
     this.nickname = this.getNicknameFromToken();
   }
 
-  createTopic() {
-    this.openCreateTopic.emit();
+  createPost() {
+    this.openCreatePost.emit();
   }
 
   logout() { 

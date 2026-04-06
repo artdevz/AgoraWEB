@@ -1,40 +1,40 @@
 import { Component } from '@angular/core';
-import { TopicService } from '../../services/topic-service';
+import { PostService } from '../../services/post-service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommentNode } from '../../components/comment-node/comment-node';
-import { Topic } from '../../models/Topic';
+import { Post } from '../../models/Post';
 
 @Component({
   selector: 'app-topic',
   standalone: true,
   imports: [CommonModule, FormsModule, CommentNode],
-  templateUrl: './topic-page.html',
-  styleUrl: './topic-page.css',
+  templateUrl: './post-page.html',
+  styleUrl: './post-page.css',
 })
-export class TopicPage {
+export class PostPage {
 
-  topic: Topic | null = null;
+  post: Post | null = null;
   comments: any[] = [];
 
   newComment: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private topicService: TopicService
+    private postService: PostService
   ) {}
 
   ngOnInit() {
-    const topicId = this.route.snapshot.paramMap.get('id');
-    if (topicId) {
-      this.topicService.readAll().subscribe({
+    const postID = this.route.snapshot.paramMap.get('id');
+    if (postID) {
+      this.postService.readAll().subscribe({
         next: (response) => {
-          console.log('Topic & Comments retrieved successfully:', response);
-          this.topic = response.find(t => t.id === topicId) || null;
+          console.log('Post & Comments retrieved successfully:', response);
+          this.post = response.find(p => p.id === postID) || null;
         },
         error: (error) => {
-          console.error('Error retrieving topics & comments:', error);
+          console.error('Error retrieving posts & comments:', error);
         }
       });
     }

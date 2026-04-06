@@ -4,15 +4,15 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class TopicService {
-  private readonly API = 'http://localhost:8080/topic';
+export class PostService {
+  private readonly API = 'http://localhost:8080/post';
 
   constructor(
     private http: HttpClient
   ) {}
 
   create(title: string, description: string) {
-    console.log('Creating topic with title:', title, 'and description:', description);
+    console.log('Creating post with title:', title, 'and description:', description);
     return this.http.post<any>(`${this.API}`, {
       title,
       description

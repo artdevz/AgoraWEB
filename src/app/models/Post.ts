@@ -1,4 +1,4 @@
-export interface Topic {
+export interface Post {
     id: Text;
     title: Text;
     description: Text;

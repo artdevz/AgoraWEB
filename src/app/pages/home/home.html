@@ -1,5 +1,5 @@
-<div class="topic" *ngFor="let topic of topics" [routerLink]="['/topic', topic.id]">
-  <h3>{{ topic.title }}</h3>
-  <p>{{ topic.description }}</p>
-  <small>{{ topic.createdAt }}</small>
+<div class="post" *ngFor="let post of posts" [routerLink]="['/post', post.id]">
+  <h3>{{ post.title }}</h3>
+  <p>{{ post.description }}</p>
+  <small>{{ post.createdAt }}</small>
 </div>

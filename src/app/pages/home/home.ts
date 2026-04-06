@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Topic } from '../../models/Topic';
-import { TopicService } from '../../services/topic-service';
+import { Post } from '../../models/Post';
+import { PostService } from '../../services/post-service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -12,20 +12,20 @@ import { RouterLink } from '@angular/router';
 })
 export class Home {
 
-  topics: Topic[] = [];
+  posts: Post[] = [];
 
   constructor(
-    private topicService: TopicService
+    private postService: PostService
   ) {}
 
   ngOnInit() {
-    this.topicService.readAll().subscribe({
+    this.postService.readAll().subscribe({
       next: (response) => {
-        console.log('Topics retrieved successfully:', response);
-        this.topics = response;
+        console.log('Posts retrieved successfully:', response);
+        this.posts = response;
       },
       error: (error) => {
-        console.error('Error retrieving topics:', error);
+        console.error('Error retrieving posts:', error);
       }
     });
   }
