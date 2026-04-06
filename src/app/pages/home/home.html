@@ -1,10 +1,5 @@
-<div class="home-container">
-  <div class="home-content">
-    <h1>Bem-vindo</h1>
-    <p>Você está autenticado no sistema.</p>
-
-    <div class="home-box">
-      Área principal do sistema
-    </div>
-  </div>
+<div class="topic" *ngFor="let topic of topics" [routerLink]="['/topic', topic.id]">
+  <h3>{{ topic.title }}</h3>
+  <p>{{ topic.description }}</p>
+  <small>{{ topic.createdAt }}</small>
 </div>

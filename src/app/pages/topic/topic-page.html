@@ -1,0 +1,44 @@
+<div class="topic-page" *ngIf="topic">
+
+    <div class="topic-card">
+        <h2>{{ topic.title }}</h2>
+        <p class="description">{{ topic.description }}</p>
+        <small>{{ topic.createdAt }}</small>
+
+        <!-- <div class="media" *ngIf="topic.mediaUrls?.length">
+            <div *ngFor="let media of topic.mediaUrls">
+        
+                <img 
+                *ngIf="media.endsWith('.png') || media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.gif')" 
+                [src]="media" 
+                />
+
+                <video 
+                *ngIf="media.endsWith('.mp4') || media.endsWith('.webm')" 
+                [src]="media" 
+                controls
+                ></video>
+            </div>
+
+        </div> -->
+
+        <div class="actions">
+            <button>👍</button>
+            <button>👎</button>
+        </div>
+    </div>
+
+    <div class="comment-box">
+        <textarea [(ngModel)]="newComment" placeholder="Comentar.."></textarea>
+        <button (click)="submitComment()">Enviar</button>
+    </div>
+
+    <div class="comments">
+        <app-comment-node
+            *ngFor = "let comment of comments"
+            [comment]="comment"
+            (reply)="onReply($event)">
+        </app-comment-node>
+    </div>
+
+</div>

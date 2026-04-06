@@ -1,0 +1,17 @@
+<div class="comment">
+    <p>{{ comment.content }}</p>
+    <button (click)="showReply = !showReply">Responder</button>
+
+    <div *ngIf="showReply">
+        <textarea [(ngModel)]="replyText" placeholder="Escreva sua resposta..."></textarea>
+        <button (click)="sendReply()">Enviar</button>
+    </div>
+
+    <div class="children" *ngIf="comment.children?.length">
+        <app-comment-node 
+            *ngFor="let child of comment.children" 
+            [comment]="child" 
+            (reply)="reply.emit($event)">
+        </app-comment-node>
+    </div>
+</div>

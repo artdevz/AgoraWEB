@@ -1,0 +1,9 @@
+.comment {
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.children {
+    margin-left: 20px;
+}

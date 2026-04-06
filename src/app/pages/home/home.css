@@ -1,0 +1,44 @@
+.feed {
+  max-width: 600px;
+  margin: 80px auto 20px auto;
+  padding: 0 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.topic {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.topic:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.topic h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.topic p {
+  margin: 0;
+  color: #444;
+}
+
+.topic small {
+  color: #888;
+  font-size: 12px;
+}

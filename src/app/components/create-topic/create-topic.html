@@ -2,9 +2,14 @@
     <div class="modal" (click)="$event.stopPropagation()">
         <h2>Qual tópico desejas discutir?</h2>
 
-        <textarea
-            [(ngModel)]="content"
-            placeholder="Escreva algo...">
+        <textarea name="title" id="title"
+            [(ngModel)]="title"
+            placeholder="Título do tópico...">
+        </textarea>
+
+        <textarea name="description" id="description" 
+            [(ngModel)]="description" 
+            placeholder="Descrição (Opcional)...">
         </textarea>
 
         <input 

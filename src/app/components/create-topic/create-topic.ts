@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TopicService } from '../../services/topic-service';
 
 @Component({
   selector: 'app-create-topic',
@@ -14,14 +15,28 @@ export class CreateTopic {
 
   selectedFiles: File[] = [];
   previewUrls: string[] = [];
-  content: string = '';
+  title: string = '';
+  description: string = '';
+
+  constructor(
+    private topicService: TopicService
+  ) {}
 
   closeModal() {
     this.close.emit();
   }
 
   submitTopic() {
-    this.closeModal();
+    this.topicService.create(this.title, this.description).subscribe({
+      next: (response) => {
+        console.log('Topic created successfully:', response);
+        this.closeModal();
+      },
+      error: (error) => {
+        console.error('Error creating topic:', error);
+      }
+    });
+    
   }
 
   onFileSelected(event: any) {
