@@ -1,5 +1,5 @@
 export interface Post {
-    id: Text;
+    id: string;
     title: Text;
     description: Text;
     createdAt: Text;

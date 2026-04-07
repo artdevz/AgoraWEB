@@ -1,41 +1,27 @@
 <div class="post-page" *ngIf="post">
 
     <div class="post-card">
-        <h2>{{ post.title }}</h2>
+        <div class="post-header">
+            <h2>{{ post.title }}</h2>
+            <small>{{ post.createdAt }}</small>
+        </div>
+
         <p class="description">{{ post.description }}</p>
-        <small>{{ post.createdAt }}</small>
-
-        <!-- <div class="media" *ngIf="post.mediaUrls?.length">
-            <div *ngFor="let media of post.mediaUrls">
-        
-                <img 
-                *ngIf="media.endsWith('.png') || media.endsWith('.jpg') || media.endsWith('.jpeg') || media.endsWith('.gif')" 
-                [src]="media" 
-                />
-
-                <video 
-                *ngIf="media.endsWith('.mp4') || media.endsWith('.webm')" 
-                [src]="media" 
-                controls
-                ></video>
-            </div>
-
-        </div> -->
 
         <div class="actions">
-            <button>👍</button>
-            <button>👎</button>
+            <button class="like">👍</button>
+            <button class="dislike">👎</button>
         </div>
     </div>
 
     <div class="comment-box">
-        <textarea [(ngModel)]="newComment" placeholder="Comentar.."></textarea>
+        <textarea [(ngModel)]="newComment" placeholder="Escreva um comentário..."></textarea>
         <button (click)="submitComment()">Enviar</button>
     </div>
 
     <div class="comments">
         <app-comment-node
-            *ngFor = "let comment of comments"
+            *ngFor="let comment of comments"
             [comment]="comment"
             (reply)="onReply($event)">
         </app-comment-node>

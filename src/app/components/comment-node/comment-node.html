@@ -1,8 +1,13 @@
 <div class="comment">
-    <p>{{ comment.content }}</p>
-    <button (click)="showReply = !showReply">Responder</button>
+    <div class="comment-body">
+        <p class="content">{{ comment.content }}</p>
 
-    <div *ngIf="showReply">
+        <button class="reply-btn" (click)="showReply = !showReply">
+            Responder
+        </button>
+    </div>
+
+    <div class="reply-box" *ngIf="showReply">
         <textarea [(ngModel)]="replyText" placeholder="Escreva sua resposta..."></textarea>
         <button (click)="sendReply()">Enviar</button>
     </div>

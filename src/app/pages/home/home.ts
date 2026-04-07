@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Post } from '../../models/Post';
 import { PostService } from '../../services/post-service';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,8 @@ export class Home {
   posts: Post[] = [];
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -23,6 +24,7 @@ export class Home {
       next: (response) => {
         console.log('Posts retrieved successfully:', response);
         this.posts = response;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error retrieving posts:', error);
