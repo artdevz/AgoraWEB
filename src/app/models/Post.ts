@@ -1,8 +1,11 @@
+import { User } from "./User";
+
 export interface Post {
     id: string;
-    title: Text;
-    description: Text;
-    createdAt: Text;
+    author: User;
+    title: string;
+    description: string;
+    createdAt: string;
 
     // mediaUrls?: string[];
 }

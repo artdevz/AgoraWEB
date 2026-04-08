@@ -1,4 +1,5 @@
 <div class="post" *ngFor="let post of posts" [routerLink]="['/post', post.id]">
+  <h4>{{ post.author.nickname }}</h4>
   <h3>{{ post.title }}</h3>
   <p>{{ post.description }}</p>
   <small>{{ post.createdAt }}</small>

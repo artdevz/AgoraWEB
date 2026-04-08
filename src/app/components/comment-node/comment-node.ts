@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Comment } from '../../models/Comment';
 
 @Component({
   selector: 'app-comment-node',
@@ -11,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class CommentNode {
 
-  @Input() comment: any;
-  @Output() reply = new EventEmitter<any>();
+  @Input() comment!: Comment;
+  @Output() reply = new EventEmitter< { parentId: string; content: string }>();
 
   showReply = false;
   replyText = '';
