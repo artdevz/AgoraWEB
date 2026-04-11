@@ -28,6 +28,7 @@ export class Login {
 
   onLogin() {
     this.errorMessage = '';
+    localStorage.removeItem('token');
     
     this.auth.login(this.email, this.password)
       .subscribe({

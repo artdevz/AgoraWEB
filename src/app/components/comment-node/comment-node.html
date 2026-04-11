@@ -1,22 +1,56 @@
 <div class="comment">
     <div class="comment-body">
-        <p class="content">{{ comment.content }}</p>
 
-        <button class="reply-btn" (click)="showReply = !showReply">
-            Responder
-        </button>
+        <div class="comment-header">
+            <div class="avatar"></div>
+
+            <div class="meta">
+                <span class="author">{{ comment.author.nickname }}</span>
+                <span class="time">{{ comment.createdAt | timeAgo }}</span>
+            </div>
+        </div>
+
+        <p class="content" [class.deleted]="comment.deleted" *ngIf="!editing">
+            {{ comment.content }}
+        </p>
+        
+        <p class="mode" *ngIf="comment.edited && !comment.deleted">(editado)</p>
+
+        <div class="edit-box" *ngIf="editing && comment.deleted">
+            <textarea [(ngModel)]="editText"></textarea>
+
+            <div class="edit-actions">
+                <button (click)="confirmEdit()">Salvar</button>
+                <button (click)="cancelEdit()">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="actions" *ngIf="!comment.deleted">
+            <button class="reply-btn" (click)="showReply = !showReply">
+                Responder
+            </button>
+
+            <div class="owner-actions" *ngIf="currentUserID === comment.author.id">
+                <button class="edit-btn" (click)="startEdit()" *ngIf="!editing">✏️ Editar</button>
+                <button class="delete-btn" (click)="deleteComment()" *ngIf="!editing">🗑 Excluir</button>
+            </div>
+        </div>        
+
     </div>
 
-    <div class="reply-box" *ngIf="showReply">
-        <textarea [(ngModel)]="replyText" placeholder="Escreva sua resposta..."></textarea>
+    <div class="reply-box" *ngIf="showReply && !comment.deleted">
+        <textarea [(ngModel)]="replyText"></textarea>
         <button (click)="sendReply()">Enviar</button>
     </div>
 
     <div class="children" *ngIf="comment.children?.length">
         <app-comment-node 
-            *ngFor="let child of comment.children" 
-            [comment]="child" 
-            (reply)="reply.emit($event)">
+            *ngFor="let child of comment.children"
+            [comment]="child"
+            [currentUserID]="currentUserID"
+            (reply)="reply.emit($event)"
+            (edit)="edit.emit($event)"
+            (delete)="delete.emit($event)">
         </app-comment-node>
     </div>
 </div>

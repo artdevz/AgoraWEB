@@ -3,10 +3,11 @@ import { Post } from '../../models/Post';
 import { PostService } from '../../services/post-service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TimeAgoPipe } from '../../pipes/time-ago-pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TimeAgoPipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

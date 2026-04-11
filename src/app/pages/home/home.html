@@ -1,6 +1,26 @@
-<div class="post" *ngFor="let post of posts" [routerLink]="['/post', post.id]">
-  <h4>{{ post.author.nickname }}</h4>
-  <h3>{{ post.title }}</h3>
-  <p>{{ post.description }}</p>
-  <small>{{ post.createdAt }}</small>
+<div class="feed">
+
+  <div class="post" 
+       *ngFor="let post of posts" 
+       [routerLink]="['/post', post.id]">
+
+    <!-- HEADER -->
+    <div class="post-header">
+      <span class="author">{{ post.author.nickname }}</span>
+      <span class="time">{{ post.createdAt | timeAgo }}</span>
+    </div>
+
+    <!-- TITLE -->
+    <h3 class="title">{{ post.title }}</h3>
+
+    <!-- DESCRIPTION -->
+    <p class="description">{{ post.description }}</p>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <button class="like">❤️</button>
+    </div>
+
+  </div>
+
 </div>

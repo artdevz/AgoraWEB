@@ -8,6 +8,7 @@ export interface Comment {
     createdAt: string;
     content: string;
     edited: boolean;
-    parent?: Comment | null;
+    deleted: boolean;
+    parentID?: string | null;
     children: Comment[];
 }

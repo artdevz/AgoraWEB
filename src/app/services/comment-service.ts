@@ -25,4 +25,21 @@ export class CommentService {
   readByPostID(postID: string) {
     return this.http.get<any[]>(`${this.API}/post/${postID}`);
   }
+
+  update(commentID: string, content: string) {
+    console.log('Updating comment with ID:', commentID, 'to new content:', content);
+    return this.http.put<any>(`${this.API}/${commentID}`, {
+      content
+    }, {
+      responseType: 'text' as 'json'
+    });
+  }
+
+  delete(commentID: string) {
+    console.log('Deleting comment with ID:', commentID);
+    return this.http.delete(`${this.API}/${commentID}`, {
+      responseType: 'text' as 'json'
+    });
+  }
+  
 }
