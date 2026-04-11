@@ -14,12 +14,27 @@ import { CreatePost, } from './components/create-post/create-post';
 export class App {
   protected readonly title = signal('agoraWEB');
 
+  theme: 'light' | 'dark' = 'light';
   showCreatePost = false;
 
   constructor(
     public auth: AuthService,
     public router: Router
   ) {}
+
+  ngOnInit() {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
+
+    this.theme = savedTheme || 'light';
+    document.documentElement.setAttribute('data-theme', this.theme);
+  }
+
+  toggleTheme() {
+    this.theme = this.theme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', this.theme);
+    document.documentElement.setAttribute('data-theme', this.theme); 
+    console.log("Tema alterado para: ", this.theme);
+  }
 
   showHeader(): boolean {
     const hiddenRoutes = ['/login', '/register'];

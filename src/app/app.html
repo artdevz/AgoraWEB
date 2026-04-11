@@ -1,4 +1,4 @@
-<app-header *ngIf="showHeader()" (openCreatePost)="showCreatePost = true"></app-header>
+<app-header *ngIf="showHeader()" (openCreatePost)="showCreatePost = true" (toggleThemeEvent)="toggleTheme()"></app-header>
 
 <app-create-post 
     *ngIf="showCreatePost" 

@@ -1,13 +1,37 @@
 <header class="app-header">
   <div class="header-content">
-    <div class="logo" routerLink="/">
-      ÁGORA
+
+    <div class="left">
+      <div class="logo" routerLink="/">ÁGORA</div>
     </div>
 
-    <nav class="nav-actions">
-      <span class="nickname" *ngIf="nickname"> {{ nickname }} </span>
-      <button (click)="createPost()">New Post</button>
-      <button (click)="logout()">Logout</button>
-    </nav>
+    <div class="center">
+      <input type="text" placeholder="Buscar algo..." class="search-input">
+    </div>
+
+    <div class="right">
+      <button class="create-btn" (click)="createPost()">
+        <span class="plus">+</span>
+        Criar
+      </button>
+
+      <button class="notifications-btn">🔔</button>
+
+      <button class="account" (click)="toggleMenu()">
+        <div class="avatar"></div>
+      </button>
+
+      <div class="dropdown" *ngIf="openMenu">
+        <div class="dropdown-header">{{ nickname }}</div>
+
+        <button (click)="goToProfile()">Perfil</button>
+        <button (click)="goToSettings()">Configurações</button>
+        <button (click)="toggleTheme()">Modo Claro/Escuro</button>
+
+        <div class="divider"></div>
+
+        <button class="logout" (click)="logout()">Sair</button>
+      </div>
+    </div>
   </div>
 </header>

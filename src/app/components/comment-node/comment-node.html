@@ -16,7 +16,7 @@
         
         <p class="mode" *ngIf="comment.edited && !comment.deleted">(editado)</p>
 
-        <div class="edit-box" *ngIf="editing && comment.deleted">
+        <div class="edit-box" *ngIf="editing && !comment.deleted">
             <textarea [(ngModel)]="editText"></textarea>
 
             <div class="edit-actions">
