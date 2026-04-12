@@ -14,6 +14,8 @@ import { TimeAgoPipe } from '../../pipes/time-ago-pipe';
 export class Home {
 
   posts: Post[] = [];
+  openMenuID: string | null = null;
+  admin = false;
 
   constructor(
     private postService: PostService,
@@ -31,6 +33,22 @@ export class Home {
         console.error('Error retrieving posts:', error);
       }
     });
+  }
+
+  toggleMenu(postID: string) {
+    this.openMenuID = this.openMenuID === postID ? null : postID;
+  }
+
+  mute(post: Post) {
+    console.log("Silenciar usuário ", post.author);
+  }
+
+  report(post: Post) {
+    console.log("Denunciar Usuário + Post", post.author, " com seu post ", post);
+  }
+
+  ban(post: Post) {
+    console.log("Banir usuário ", post.author);
   }
 
 }

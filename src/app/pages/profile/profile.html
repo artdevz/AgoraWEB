@@ -1,1 +1,8 @@
 <p>profile works!</p>
+
+<div class="comments">
+    <app-comment-node
+    *ngFor="let comment of comments"
+    [comment]="comment">
+    </app-comment-node>
+</div>

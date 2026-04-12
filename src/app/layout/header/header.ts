@@ -28,7 +28,7 @@ export class Header implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.nickname = this.getNicknameFromToken();
+    this.nickname = this.auth.getNickname();
   }
 
   createPost() {
@@ -55,19 +55,6 @@ export class Header implements OnInit {
   logout() { 
     this.auth.logout();
     this.router.navigate(['/login']);
-  }
-
-  private getNicknameFromToken(): string | null {
-    const token = localStorage.getItem('token');
-    if (!token) return null;
-
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.nickname || null;
-    }
-    catch {
-      return null;
-    }
   }
 
 }

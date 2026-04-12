@@ -4,19 +4,28 @@
        *ngFor="let post of posts" 
        [routerLink]="['/post', post.id]">
 
-    <!-- HEADER -->
     <div class="post-header">
-      <span class="author">{{ post.author.nickname }}</span>
-      <span class="time">{{ post.createdAt | timeAgo }}</span>
+      <div class="meta">
+        <span class="author">{{ post.author.nickname }}</span>
+        <span class="time">{{ post.createdAt | timeAgo }}</span>
+      </div>
+
+      <div class="menu-container" (click)="$event.stopPropagation()">
+        <button class="menu-btn" (click)="toggleMenu(post.id)">
+          ...
+        </button>
+
+        <div class="menu-dropdown" *ngIf="openMenuID === post.id">
+          <button (click)="mute(post)">Silenciar</button>
+          <button (click)="report(post)">Denunciar</button>
+          <button *ngIf="admin" (click)="ban(post)">Banir</button>
+        </div>
+      </div>
     </div>
 
-    <!-- TITLE -->
     <h3 class="title">{{ post.title }}</h3>
-
-    <!-- DESCRIPTION -->
     <p class="description">{{ post.description }}</p>
 
-    <!-- ACTIONS -->
     <div class="actions">
       <button class="like">❤️</button>
     </div>
