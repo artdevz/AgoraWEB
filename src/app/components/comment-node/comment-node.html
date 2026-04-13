@@ -10,22 +10,28 @@
             </div>
         </div>
 
-        <p class="content" [class.deleted]="comment.deleted" *ngIf="!editing">
-            {{ comment.content }}
-        </p>
-        
-        <p class="mode" *ngIf="comment.edited && !comment.deleted">(editado)</p>
+        <ng-container *ngIf="comment.status !== 'DELETED'; else deletedTpl">
+            <p class="content" *ngIf="!editing">
+                {{ comment.content }}
+            </p>
 
-        <div class="edit-box" *ngIf="editing && !comment.deleted">
-            <textarea [(ngModel)]="editText"></textarea>
+            <div class="edit-box" *ngIf="editing">
+                <textarea [(ngModel)]="editText"></textarea>
 
-            <div class="edit-actions">
-                <button (click)="confirmEdit()">Salvar</button>
-                <button (click)="cancelEdit()">Cancelar</button>
+                <div class="edit-actions">
+                    <button (click)="confirmEdit()">Salvar</button>
+                    <button (click)="cancelEdit()">Cancelar</button>
+                </div>
             </div>
-        </div>
+        </ng-container>
 
-        <div class="actions" *ngIf="!comment.deleted">
+        <ng-template #deletedTpl>
+            <p class="deleted">Comentário deletado</p>
+        </ng-template>
+        
+        <p class="status" *ngIf="comment.status === 'EDITED'">(editado)</p>        
+
+        <div class="actions" *ngIf="comment.status !== 'DELETED'">
             <button class="reply-btn" (click)="showReply = !showReply">
                 Responder
             </button>
@@ -38,7 +44,7 @@
 
     </div>
 
-    <div class="reply-box" *ngIf="showReply && !comment.deleted">
+    <div class="reply-box" *ngIf="showReply && comment.status !== 'DELETED'">
         <textarea [(ngModel)]="replyText"></textarea>
         <button (click)="sendReply()">Enviar</button>
     </div>
@@ -47,10 +53,7 @@
         <app-comment-node 
             *ngFor="let child of comment.children"
             [comment]="child"
-            [currentUserID]="currentUserID"
-            (reply)="reply.emit($event)"
-            (edit)="edit.emit($event)"
-            (delete)="delete.emit($event)">
+            [currentUserID]="currentUserID">
         </app-comment-node>
     </div>
 </div>

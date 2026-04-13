@@ -1,33 +1,48 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Post } from '../../models/Post';
 import { Comment } from '../../models/Comment';
-import { AuthService } from '../../auth/auth-service';
 import { UserService } from '../../services/user-service';
 import { CommentNode } from '../../components/comment-node/comment-node';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { TimeAgoPipe } from '../../pipes/time-ago-pipe';
+import { User } from '../../models/User';
+import { PostNode } from '../../components/post-node/post-node';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, CommentNode],
+  imports: [CommonModule, PostNode, CommentNode, TimeAgoPipe],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
 export class Profile {
 
-  nickname: string | null = null;
+  user: User | null = null;
+  avatarUrl: string = '';
+
   posts: Post[] = [];
   comments: Comment[] = [];
 
+  tab: 'overview' | 'posts' | 'comments' = 'overview';
+
   constructor(
-    private auth: AuthService,
     private userService: UserService,
+    private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    // const nickname = this.route.snapshot.paramMap.get('nickname');
-    this.nickname = this.auth.getNickname();
-    this.userService.readAllPostByNickname('Art').subscribe({
+    const nickname = this.route.snapshot.paramMap.get('nickname');
+    if (!nickname) return;
+
+    this.userService.readByNickname(nickname).subscribe({
+      next: (response) => {
+        this.user = response;
+        this.cdr.detectChanges();
+      }
+    });
+
+    this.userService.readAllPostByNickname(nickname).subscribe({
       next: (response) => {
         this.posts = response;
         this.cdr.detectChanges();
@@ -37,7 +52,7 @@ export class Profile {
       }
     });
 
-    this.userService.readAllCommentsByNickname('Art').subscribe({
+    this.userService.readAllCommentsByNickname(nickname).subscribe({
       next: (response) => {
         this.comments = response;
         this.cdr.detectChanges();
@@ -46,7 +61,10 @@ export class Profile {
         console.error('Error retrieving comments:', error);
       }
     });
+  }
 
+  setTab(tab: 'overview' | 'posts' | 'comments') {
+    this.tab = tab;
   }
 
 }

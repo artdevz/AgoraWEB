@@ -7,13 +7,13 @@ import { CommentNode } from '../../components/comment-node/comment-node';
 import { Post } from '../../models/Post';
 import { CommentService } from '../../services/comment-service';
 import { Comment } from '../../models/Comment';
-import { TimeAgoPipe } from '../../pipes/time-ago-pipe';
 import { AuthService } from '../../auth/auth-service';
+import { PostNode } from '../../components/post-node/post-node';
 
 @Component({
   selector: 'app-topic',
   standalone: true,
-  imports: [CommonModule, FormsModule, CommentNode, TimeAgoPipe],
+  imports: [CommonModule, FormsModule, PostNode, CommentNode],
   templateUrl: './post-page.html',
   styleUrl: './post-page.css',
 })
@@ -74,7 +74,7 @@ export class PostPage {
         }
       });
 
-      this.commentService.readByPostID(postID).subscribe({
+      this.postService.readAllCommentsByID(postID).subscribe({
         next: (response) => {
           console.log('Comments retrieved successfully:', response);
           this.comments = this.buildTree(response);
@@ -91,7 +91,7 @@ export class PostPage {
   reloadComments() {
     if (!this.post?.id) return;
 
-    this.commentService.readByPostID(this.post.id).subscribe({
+    this.postService.readAllCommentsByID(this.post.id).subscribe({
       next: (response) => {
         this.comments = this.buildTree(response);
         this.cdr.detectChanges();
@@ -114,48 +114,6 @@ export class PostPage {
         console.error('Error creating comment:', error);
       }
     });    
-  }
-
-  onReply(event: { parentId: string; content: string }) {
-    const { parentId, content } = event;
-
-    if (!this.post?.id) return;
-
-    this.commentService.create(this.post.id, content, parentId).subscribe({
-      next: (response) => {
-        console.log('Reply created successfully:', response);
-        this.reloadComments();
-      },
-      error: (error) => {
-        console.error('Error creating reply:', error);
-      }
-    });
-  }
-
-  editComment(event: { commentId: string; content: string }) {
-    const { commentId, content } = event;
-
-    this.commentService.update(commentId, content).subscribe({
-      next: (response) => {
-        console.log('Comment updated successfully:', response);
-        this.reloadComments();
-      },
-      error: (error) => {
-        console.error('Error updating comment:', error);
-      }
-    });
-  }
-
-  deleteComment(commentId: string) {
-    this.commentService.delete(commentId).subscribe({
-      next: (response) => {
-        console.log('Comment deleted successfully:', response);
-        this.reloadComments();
-      },
-      error: (error) => {
-        console.error('Error deleting comment:', error);
-      }
-    });
   }
 
 }

@@ -1,8 +1,64 @@
-<p>profile works!</p>
-
+<!-- <p>profile works!</p>
+<span>{{ nickname }}</span>
 <div class="comments">
     <app-comment-node
     *ngFor="let comment of comments"
     [comment]="comment">
     </app-comment-node>
+</div> -->
+
+<div class="profile-page" *ngIf="user">
+    <div class="profile-header">
+        <img class="avatar" [src]="avatarUrl" alt="avatar">
+
+        <div class="info">
+            <h2>{{ user.nickname }}</h2>
+            <p class="meta">
+                Criado em {{ user.createdAt | date: 'dd/MM/yyyy' }}
+                • {{ user.createdAt | timeAgo }}
+            </p>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button (click)="setTab('overview')" [class.active]="tab === 'overview'">Overview</button>
+        <button (click)="setTab('posts')" [class.active]="tab === 'posts'">Posts</button>
+        <button (click)="setTab('comments')" [class.active]="tab === 'comments'">Comentários</button>
+    </div>
+
+    <div class="content">
+        <ng-container *ngIf="tab === 'overview'">
+            
+            <h3>Posts recentes</h3>
+            <app-post-node
+                *ngFor="let post of posts.slice(0,3)"
+                [post]="post">
+            </app-post-node>
+
+            <h3>Comentários recents</h3>
+            <app-comment-node
+                *ngFor="let comment of comments.slice(0,3)"
+                [comment]="comment">
+            </app-comment-node>
+
+        </ng-container>
+
+        <ng-container *ngIf="tab === 'posts'">
+
+            <app-post-node
+                *ngFor="let post of posts"
+                [post]="post">
+            </app-post-node>
+
+        </ng-container>
+
+        <ng-container *ngIf="tab === 'comments'">
+
+            <app-comment-node
+                *ngFor="let comment of comments"
+                [comment]="comment">
+            </app-comment-node>
+
+        </ng-container>
+    </div>
 </div>

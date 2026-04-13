@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Comment } from '../../models/Comment';
 import { TimeAgoPipe } from '../../pipes/time-ago-pipe';
+import { CommentService } from '../../services/comment-service';
 
 @Component({
   selector: 'app-comment-node',
@@ -15,9 +16,6 @@ export class CommentNode {
 
   @Input() comment!: Comment;
   @Input() currentUserID!: string;
-  @Output() reply = new EventEmitter< { parentId: string; content: string }>();
-  @Output() edit = new EventEmitter< { commentId: string; content: string }>();
-  @Output() delete = new EventEmitter<string>();
 
   showReply = false;
   editing = false;
@@ -25,12 +23,15 @@ export class CommentNode {
   replyText = '';
   editText = '';
 
+  constructor(private commentService: CommentService) {}
+
   sendReply() {
     if (this.replyText.trim()) {
-      this.reply.emit({
-        parentId: this.comment.id,
-        content: this.replyText.trim()  
-      });
+      this.commentService.create(
+        this.comment.post.id,
+        this.replyText,
+        this.comment.id
+      ).subscribe();
 
       this.replyText = '';
       this.showReply = false;
@@ -49,17 +50,17 @@ export class CommentNode {
 
   confirmEdit() {
     if (this.editText.trim()) {
-      this.edit.emit({
-        commentId: this.comment.id,
-        content: this.editText.trim()
-      });
+      this.commentService.update(
+        this.comment.id,
+        this.editText
+      ).subscribe();
     }
 
     this.editing = false;
   }
 
   deleteComment() {
-    this.delete.emit(this.comment.id);
+    this.commentService.delete(this.comment.id).subscribe();
   }
 
 }

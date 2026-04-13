@@ -1,0 +1,28 @@
+<div class="post">
+
+    <div class="post-header">
+
+        <div class="author">
+            <span class="nickname">{{ post.author.nickname }}</span>
+            <span class="time"> {{ post.createdAt | timeAgo }}</span>
+        </div>
+
+        <div class="menu">
+            <button (click)="toggleMenu()">...</button>
+
+            <div class="dropdown" *ngIf="openMenu">
+                <button (click)="onMute()">🔇 Silenciar</button>
+                <button (click)="onReport()">🚩 Denunciar</button>
+                <button *ngIf="currentUserID === post.author.id" (click)="onDelete()">🗑 Excluir</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="post-body" [routerLink]="['/post', post.id]">
+        <h3>{{ post.title}}</h3>
+        <p *ngIf="post.status !== 'DELETED'">{{ post.description}}</p>
+        <p class="deleted" *ngIf="post.status === 'DELETED'">[Post foi removido: Não é mais possível comentar nem curtir esse post]</p>
+    </div>
+
+</div>

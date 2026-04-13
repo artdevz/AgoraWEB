@@ -56,7 +56,12 @@
     font-style: italic;
 }
 
-.mode {
+.status {
+    font-size: 11px;
+    color: gray;
+}
+
+.deleted {
     font-size: 11px;
     color: gray;
 }

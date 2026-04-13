@@ -1,0 +1,46 @@
+.post {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.time {
+  color: gray;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.menu {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-body {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.deleted {
+  font-size: 14px;
+  color: gray;
+}

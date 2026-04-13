@@ -11,6 +11,10 @@ export class UserService {
     private http: HttpClient
   ) {}
 
+  readByNickname(nickname: string) {
+    return this.http.get<any>(`${this.API}/${nickname}`);
+  }
+
   readAllPostByNickname(nickname: string) {
     return this.http.get<any[]>(`${this.API}/${nickname}/posts`);
   }

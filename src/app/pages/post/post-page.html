@@ -1,31 +1,8 @@
 <div class="post-page" *ngIf="post">
 
-    <div class="post-card">
-
-        <div class="post-header">
-            <div class="author-info">
-                <span class="author">{{ post.author.nickname }}</span>
-                <span class="time">{{ post.createdAt | timeAgo }}</span>
-            </div>
-        </div>
-
-        <h2 class="title">{{ post.title }}</h2>
-
-        <p class="description">{{ post.description }}</p>
-
-        <!-- MEDIA To-do -->
-        <!--
-        <div class="media" *ngIf="post.mediaUrls?.length">
-            <img *ngFor="let media of post.mediaUrls" [src]="media" />
-        </div>
-        -->
-
-        <div class="actions">
-            <button class="like">❤️</button>
-            <span class="comment-count">{{ comments.length }} comentários</span>
-        </div>
-
-    </div>
+    <app-post-node
+        [post]="post">
+    </app-post-node>
 
     <div class="comment-box">
         <textarea [(ngModel)]="newComment" placeholder="Escreva um comentário..."></textarea>
@@ -36,10 +13,7 @@
         <app-comment-node
             *ngFor="let comment of comments"
             [comment]="comment"
-            [currentUserID]="currentUserID"
-            (reply)="onReply($event)"
-            (edit)="editComment($event)"
-            (delete)="deleteComment($event)">
+            [currentUserID]="currentUserID">
         </app-comment-node>
     </div>
 

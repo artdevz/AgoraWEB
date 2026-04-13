@@ -1,0 +1,47 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.info h2 {
+  margin: 0;
+}
+
+.meta {
+  color: gray;
+  font-size: 14px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 8px 12px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.tabs button.active {
+  background: #333;
+  color: white;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
