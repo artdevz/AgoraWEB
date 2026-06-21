@@ -20,11 +20,11 @@ export class PostService {
     private http: HttpClient
   ) {}
 
-  create(title: string, description: string) {
-    console.log('Creating post with title:', title, 'and description:', description);
+  create(title: string, content: string) {
+    console.log('Creating post with title:', title, 'and content:', content);
     return this.http.post<any>(`${this.API}`, {
       title,
-      description
+      content
     }, {
       responseType: 'text' as 'json'
     });

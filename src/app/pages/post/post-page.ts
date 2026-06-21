@@ -34,30 +34,6 @@ export class PostPage {
     private cdr: ChangeDetectorRef
   ) {}
 
-  buildTree(comments: Comment[]): Comment[] {
-    const map = new Map<string, Comment>();
-    const roots: Comment[] = [];
-
-    comments.forEach(comment => {
-      map.set(comment.id, { ...comment, children: [] });
-    });
-
-    comments.forEach(comment => {
-      const current = map.get(comment.id)!;
-
-      if (comment.parentID) {
-        const parent = map.get(comment.parentID);
-        if (parent) {
-          parent.children.push(current);
-        }
-      } else {
-        roots.push(current);
-      }
-    });
-    
-    return roots;
-  }
-
   ngOnInit() {
     this.currentUserID = this.auth.getUserID();
     const postID = this.route.snapshot.paramMap.get('id');
@@ -77,7 +53,7 @@ export class PostPage {
       this.postService.readAllCommentsByID(postID).subscribe({
         next: (response) => {
           console.log('Comments retrieved successfully:', response);
-          this.comments = this.buildTree(response);
+          this.comments = response;
           console.log("Printando todos os comentários: ", this.comments)
           this.cdr.detectChanges();
         },
@@ -93,7 +69,7 @@ export class PostPage {
 
     this.postService.readAllCommentsByID(this.post.id).subscribe({
       next: (response) => {
-        this.comments = this.buildTree(response);
+        this.comments = response;
         this.cdr.detectChanges();
       }
     });

@@ -5,7 +5,7 @@ export interface Post {
     id: string;
     author: User;
     title: string;
-    description: string;
+    content: string;
     createdAt: string;
     status: SubmitStatus;
 

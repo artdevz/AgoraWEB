@@ -10,5 +10,5 @@ export interface Comment {
     content: string;
     status: SubmitStatus;
     parentID?: string | null;
-    children: Comment[];
+    replies: Comment[];
 }

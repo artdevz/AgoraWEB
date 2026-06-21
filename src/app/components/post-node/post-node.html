@@ -19,9 +19,9 @@
 
     </div>
 
-    <div class="post-body" [routerLink]="['/post', post.id]">
+    <div class="post-body" [routerLink]="['/post', post.id, 'comments']">
         <h3>{{ post.title}}</h3>
-        <p *ngIf="post.status !== 'DELETED'">{{ post.description}}</p>
+        <p *ngIf="post.status !== 'DELETED'">{{ post.content}}</p>
         <p class="deleted" *ngIf="post.status === 'DELETED'">[Post foi removido: Não é mais possível comentar nem curtir esse post]</p>
     </div>
 

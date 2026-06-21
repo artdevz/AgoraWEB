@@ -16,7 +16,7 @@ export class CreatePost {
   selectedFiles: File[] = [];
   previewUrls: string[] = [];
   title: string = '';
-  description: string = '';
+  content: string = '';
 
   constructor(
     private postService: PostService
@@ -27,7 +27,7 @@ export class CreatePost {
   }
 
   submitPost() {
-    this.postService.create(this.title, this.description).subscribe({
+    this.postService.create(this.title, this.content).subscribe({
       next: (response) => {
         console.log('Post created successfully:', response);
         this.closeModal();

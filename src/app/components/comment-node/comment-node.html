@@ -49,10 +49,10 @@
         <button (click)="sendReply()">Enviar</button>
     </div>
 
-    <div class="children" *ngIf="comment.children?.length">
+    <div class="replies" *ngIf="comment.replies?.length">
         <app-comment-node 
-            *ngFor="let child of comment.children"
-            [comment]="child"
+            *ngFor="let reply of comment.replies"
+            [comment]="reply"
             [currentUserID]="currentUserID">
         </app-comment-node>
     </div>
