@@ -11,8 +11,8 @@
             <button (click)="toggleMenu()">...</button>
 
             <div class="dropdown" *ngIf="openMenu">
-                <button (click)="onMute()">🔇 Silenciar</button>
-                <button (click)="onReport()">🚩 Denunciar</button>
+                <button *ngIf="currentUserID != post.author.id" (click)="onMute()">🔇 Silenciar</button>
+                <button *ngIf="currentUserID != post.author.id" (click)="onReport()">🚩 Denunciar</button>
                 <button *ngIf="currentUserID === post.author.id" (click)="onDelete()">🗑 Excluir</button>
             </div>
         </div>

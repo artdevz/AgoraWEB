@@ -34,6 +34,10 @@ export class PostService {
     return this.http.get<Post[]>(`${this.API}`);
   }
 
+  readFeed() {
+    return this.http.get<Post[]>(`${this.API}/feed/new`); // To-Do: Fazer Hot, Rising etc..
+  }
+
   readById(id: string) {
     return this.http.get<Post>(`${this.API}/${id}`);
   }

@@ -21,7 +21,7 @@ export class Home {
   ) {}
 
   ngOnInit() {
-    this.postService.readAll().subscribe({
+    this.postService.readFeed().subscribe({
       next: (response) => {
         console.log('Posts retrieved successfully:', response);
         this.posts = response;

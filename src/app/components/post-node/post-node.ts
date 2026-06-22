@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PostService } from '../../services/post-service';
 import { AuthService } from '../../auth/auth-service';
+import { MuteService } from '../../services/mute-service';
 
 @Component({
   selector: 'app-post-node',
@@ -21,6 +22,7 @@ export class PostNode {
 
   constructor(
     private postService: PostService,
+    private muteService: MuteService,
     private auth: AuthService
   ) {}
 
@@ -33,7 +35,7 @@ export class PostNode {
   }
 
   onMute() {
-    
+    this.muteService.mute(this.post.author.id).subscribe();
     this.openMenu = false;
   }
 
