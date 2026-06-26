@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { PostService } from '../../services/post-service';
 import { AuthService } from '../../auth/auth-service';
 import { MuteService } from '../../services/mute-service';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-post-node',
@@ -22,6 +23,7 @@ export class PostNode {
 
   constructor(
     private postService: PostService,
+    private userService: UserService,
     private muteService: MuteService,
     private auth: AuthService
   ) {}
@@ -32,6 +34,11 @@ export class PostNode {
 
   toggleMenu() {
     this.openMenu = !this.openMenu;
+  }
+
+  onBan() {
+    this.userService.ban(this.post.author.id).subscribe();
+    this.openMenu = false;
   }
 
   onMute() {

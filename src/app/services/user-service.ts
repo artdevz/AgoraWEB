@@ -22,4 +22,16 @@ export class UserService {
   readAllCommentsByNickname(nickname: string) {
     return this.http.get<any[]>(`${this.API}/${nickname}/comments`);
   }
+
+  updateRole(id: string, role: 'USER' | 'MOD') {
+    return this.http.put<any[]>(`${this.API}/${id}/role`, role);
+  }
+
+  ban(id: string) {
+    return this.http.put(`${this.API}/${id}/ban`, {});
+  }
+
+  unban(id: string) {
+    return this.http.put(`${this.API}/${id}/unban`, {});
+  }
 }

@@ -6,18 +6,41 @@
     background: #f9f9f9;
     border-radius: 8px;
     padding: 10px;
-    transition: background 0.2s ease;
+    transition: background .2s ease;
 }
 
 .comment-body:hover {
     background: #f1f1f1;
 }
 
+/* Comentário deletado */
+
+.comment-body.deleted {
+    background: #f2f2f2;
+    color: #888;
+}
+
+.comment-body.deleted .author,
+.comment-body.deleted .time,
+.comment-body.deleted .status,
+.comment-body.deleted .content,
+.comment-body.deleted .deleted {
+    color: #888;
+}
+
+/* Header */
+
 .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.left {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 6px;
 }
 
 .avatar {
@@ -44,6 +67,8 @@
     color: #888;
 }
 
+/* Conteúdo */
+
 .content {
     margin-bottom: 6px;
     font-size: 14px;
@@ -51,7 +76,7 @@
     word-break: break-word;
 }
 
-.content.deleted {
+.deleted {
     color: #888;
     font-style: italic;
 }
@@ -61,51 +86,88 @@
     color: gray;
 }
 
-.deleted {
-    font-size: 11px;
-    color: gray;
-}
+/* Ações */
 
 .actions {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     margin-top: 6px;
 }
 
-.actions button {
+.reply-btn {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 13px;
-    padding: 2px 4px;
-}
-
-.reply-btn {
     color: #007bff;
+    font-size: 13px;
 }
 
 .reply-btn:hover {
     text-decoration: underline;
 }
 
-.owner-actions {
+/* Menu */
+
+.menu {
+    position: relative;
+}
+
+.menu-btn {
+    width: 30px;
+    height: 30px;
+
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+    font-size: 18px;
+
+    transition: background .2s;
+}
+
+.menu-btn:hover {
+    background: #e8e8e8;
+}
+
+.dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 4px);
+
+    min-width: 170px;
+
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+
+    z-index: 100;
 }
 
-.edit-btn {
-    color: #007bff;
+.dropdown button {
+    background: transparent;
+    border: none;
+
+    padding: 10px 12px;
+
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-.delete-btn {
-    color: #dc3545;
+.dropdown button:hover {
+    background: #f3f3f3;
 }
 
-.edit-btn:hover,
-.delete-btn:hover {
-    text-decoration: underline;
-}
+/* Caixa de resposta */
 
 .reply-box {
     margin-top: 8px;
@@ -114,46 +176,7 @@
     gap: 6px;
 }
 
-.reply-box textarea {
-    resize: none;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    padding: 6px;
-    font-size: 13px;
-    transition: border 0.2s;
-}
-
-.reply-box textarea:focus {
-    outline: none;
-    border-color: #007bff;
-}
-
-.reply-box button {
-    align-self: flex-end;
-    padding: 4px 10px;
-    border-radius: 6px;
-    background: #007bff;
-    color: white;
-    transition: background 0.2s;
-}
-
-.reply-box button:hover {
-    background: #0056b3;
-}
-
-.replies {
-    margin-top: 8px;
-    margin-left: 20px;
-    padding-left: 12px;
-    border-left: 2px solid #e0e0e0;
-}
-.edit-box {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 6px;
-}
-
+.reply-box textarea,
 .edit-box textarea {
     resize: none;
     border-radius: 6px;
@@ -162,15 +185,30 @@
     font-size: 13px;
 }
 
+.reply-box button {
+    align-self: flex-end;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #007bff;
+    color: white;
+}
+
+.reply-box button:hover {
+    background: #0056b3;
+}
+
+/* Edição */
+
+.edit-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
 .edit-actions {
     display: flex;
     justify-content: flex-end;
     gap: 6px;
-}
-
-.edit-actions button {
-    padding: 4px 10px;
-    border-radius: 6px;
 }
 
 .edit-actions button:first-child {
@@ -180,4 +218,14 @@
 
 .edit-actions button:last-child {
     background: #ccc;
+}
+
+/* Respostas */
+
+.replies {
+    margin-top: 10px;
+    margin-left: 28px;
+    padding-left: 14px;
+
+    border-left: 2px solid #d9d9d9;
 }

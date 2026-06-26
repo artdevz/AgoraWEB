@@ -8,9 +8,10 @@
         </div>
 
         <div class="menu">
-            <button (click)="toggleMenu()">...</button>
+            <button (click)="toggleMenu()">⋮</button>
 
             <div class="dropdown" *ngIf="openMenu">
+                <button *ngIf="currentUserID != post.author.id" (click)="onBan()">🔨 Banir</button>
                 <button *ngIf="currentUserID != post.author.id" (click)="onMute()">🔇 Silenciar</button>
                 <button *ngIf="currentUserID != post.author.id" (click)="onReport()">🚩 Denunciar</button>
                 <button *ngIf="currentUserID === post.author.id" (click)="onDelete()">🗑 Excluir</button>

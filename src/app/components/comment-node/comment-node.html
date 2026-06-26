@@ -1,16 +1,64 @@
 <div class="comment">
+
     <div class="comment-body">
 
         <div class="comment-header">
-            <div class="avatar"></div>
 
-            <div class="meta">
-                <span class="author">{{ comment.author.nickname }}</span>
-                <span class="time">{{ comment.createdAt | timeAgo }}</span>
+            <div class="left">
+                <div class="avatar"></div>
+
+                <div class="meta">
+                    <span class="author">{{ comment.author.nickname }}</span>
+                    <span class="time"> {{ comment.createdAt | timeAgo }}</span>
+                </div>
             </div>
+
+            <div class="menu">
+
+                <button class="menu-btn" (click)="toggleMenu()">
+                    ⋮
+                </button>
+
+                <div class="dropdown" *ngIf="openMenu">
+
+                    <button
+                        *ngIf="currentUserID !== comment.author.id"
+                        (click)="onBan()">
+                        🔨 Banir
+                    </button>
+
+                    <button
+                        *ngIf="currentUserID !== comment.author.id"
+                        (click)="onMute()">
+                        🔇 Silenciar
+                    </button>
+
+                    <button
+                        *ngIf="currentUserID !== comment.author.id"
+                        (click)="onReport()">
+                        🚩 Denunciar
+                    </button>
+
+                    <button
+                        *ngIf="currentUserID === comment.author.id && !editing"
+                        (click)="startEdit()">
+                        ✏️ Editar
+                    </button>
+
+                    <button
+                        *ngIf="currentUserID === comment.author.id && !editing"
+                        (click)="deleteComment()">
+                        🗑 Excluir
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
         <ng-container *ngIf="comment.status !== 'DELETED'; else deletedTpl">
+
             <p class="content" *ngIf="!editing">
                 {{ comment.content }}
             </p>
@@ -23,37 +71,51 @@
                     <button (click)="cancelEdit()">Cancelar</button>
                 </div>
             </div>
+
         </ng-container>
 
         <ng-template #deletedTpl>
-            <p class="deleted">Comentário deletado</p>
+            <p class="deleted">
+                Comentário deletado
+            </p>
         </ng-template>
-        
-        <p class="status" *ngIf="comment.status === 'EDITED'">(editado)</p>        
+
+        <p class="status" *ngIf="comment.status === 'EDITED'">
+            (editado)
+        </p>
 
         <div class="actions" *ngIf="comment.status !== 'DELETED'">
-            <button class="reply-btn" (click)="showReply = !showReply">
+
+            <button
+                class="reply-btn"
+                (click)="showReply = !showReply">
                 Responder
             </button>
 
-            <div class="owner-actions" *ngIf="currentUserID === comment.author.id">
-                <button class="edit-btn" (click)="startEdit()" *ngIf="!editing">✏️ Editar</button>
-                <button class="delete-btn" (click)="deleteComment()" *ngIf="!editing">🗑 Excluir</button>
-            </div>
-        </div>        
+        </div>
 
     </div>
 
-    <div class="reply-box" *ngIf="showReply && comment.status !== 'DELETED'">
+    <div
+        class="reply-box"
+        *ngIf="showReply && comment.status !== 'DELETED'">
+
         <textarea [(ngModel)]="replyText"></textarea>
-        <button (click)="sendReply()">Enviar</button>
+
+        <button (click)="sendReply()">
+            Enviar
+        </button>
+
     </div>
 
     <div class="replies" *ngIf="comment.replies?.length">
-        <app-comment-node 
+
+        <app-comment-node
             *ngFor="let reply of comment.replies"
             [comment]="reply"
             [currentUserID]="currentUserID">
         </app-comment-node>
+
     </div>
+
 </div>

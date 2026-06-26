@@ -1,0 +1,52 @@
+<div class="admin-container">
+  <h2>Painel Administrativo</h2>
+
+  <!-- Alterar Cargo -->
+  <div class="card">
+    <h3>Alterar Cargo</h3>
+
+    <label>ID do Usuário</label>
+    <input
+      type="text"
+      [(ngModel)]="userId"
+      placeholder="UUID do usuário"
+    />
+
+    <label>Cargo</label>
+
+    <select [(ngModel)]="role">
+      <option value="USER">Usuário</option>
+      <option value="MOD">Moderador</option>
+    </select>
+
+    <button (click)="updateRole()">
+      Salvar Cargo
+    </button>
+  </div>
+
+  <!-- Banimento -->
+  <div class="card">
+    <h3>Banimento</h3>
+
+    <label>ID do Usuário</label>
+    <input
+      type="text"
+      [(ngModel)]="banUserId"
+      placeholder="UUID do usuário"
+    />
+
+    <div class="buttons">
+      <button class="ban-btn" (click)="ban()">
+        Banir
+      </button>
+
+      <button class="unban-btn" (click)="unban()">
+        Desbanir
+      </button>
+    </div>
+  </div>
+
+  <p *ngIf="message">
+    {{ message }}
+  </p>
+</div>

@@ -17,6 +17,7 @@ export class CommentNode {
   @Input() comment!: Comment;
   @Input() currentUserID!: string;
 
+  openMenu = false;
   showReply = false;
   editing = false;
 
@@ -24,6 +25,25 @@ export class CommentNode {
   editText = '';
 
   constructor(private commentService: CommentService) {}
+
+  toggleMenu() {
+    this.openMenu = !this.openMenu;
+  }
+
+  onBan() {
+    console.log('Banir', this.comment.author.id);
+    this.openMenu = false;
+  }
+
+  onMute() {
+    console.log('Silenciar', this.comment.author.id);
+    this.openMenu = false;
+  }
+
+  onReport() {
+    console.log('Denunciar', this.comment.id);
+    this.openMenu = false;
+  }
 
   sendReply() {
     if (this.replyText.trim()) {
