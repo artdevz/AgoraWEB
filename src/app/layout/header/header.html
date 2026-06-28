@@ -6,7 +6,10 @@
     </div>
 
     <div class="center">
-      <input type="text" placeholder="Buscar algo..." class="search-input">
+      <div class="search-container">
+        <input type="text" placeholder="Buscar..." class="search-input" [(ngModel)]="searchText" (keyup.enter)="search()">
+        <button (click)="search()">🔍</button>
+      </div>
     </div>
 
     <div class="right">

@@ -8,11 +8,13 @@ import { Profile } from './pages/profile/profile';
 import { Settings } from './pages/settings/settings';
 import { Admin } from './pages/admin/admin';
 import { adminGuard } from './auth/admin-guard';
+import { Search } from './pages/search/search';
 
 export const routes: Routes = [
     { path: 'login', component: Login },
     { path: 'register', component: Register },
     { path: '', component: Home, canActivate: [authGuard] },
+    { path: 'search', component: Search, canActivate: [authGuard ]},
     { path: 'settings', component: Settings, canActivate: [authGuard] },
     { path: 'user/:nickname', component: Profile, canActivate: [authGuard] },
     { path: 'post/:id', component: PostPage, canActivate: [authGuard] },

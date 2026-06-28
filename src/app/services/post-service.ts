@@ -34,6 +34,14 @@ export class PostService {
     return this.http.get<Post[]>(`${this.API}`);
   }
 
+  search(query: string) {
+    return this.http.get<Post[]>(`${this.API}/search`, {
+      params: {
+        query
+      }
+    });
+  }
+
   readFeed() {
     return this.http.get<Post[]>(`${this.API}/feed/new`); // To-Do: Fazer Hot, Rising etc..
   }
